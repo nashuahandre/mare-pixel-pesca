@@ -59,9 +59,9 @@ Edit `game-config.js` to change points, speeds, probabilities, shiny rarity, dif
 
 The game tries to use student PNG files from the `assets` folder.
 
-If a matching PNG exists, the game draws that image. If it does not exist, the game uses the temporary Canvas placeholder, so the project never breaks.
+If the `image` field in `game-config.js` points to a PNG that exists, the game draws that image. If it does not exist, the game uses the temporary Canvas placeholder, so the project never breaks.
 
-Students can create pixel-art files in the `assets` folder using these exact names:
+The current default image names are:
 
 - `fisherman.png`
 - `cliffs.png`
@@ -82,3 +82,22 @@ Recommended art rules:
 - Transparent background is best.
 - Draw fish facing right. The game flips them automatically when they swim left.
 - Use simple file names with no spaces or accents.
+
+To add a new fish, add a new object inside `fish` in `game-config.js` and give it an image:
+
+```js
+{
+  name: "Dourada",
+  points: 25,
+  color: "#f2d36b",
+  image: "dourada.png",
+  chance: 12,
+  shinyChance: 0.015,
+  width: 90,
+  height: 38,
+  speedMin: 1.1,
+  speedMax: 2.8
+}
+```
+
+Then upload `dourada.png` to the `assets` folder.

@@ -99,6 +99,13 @@ window.GAME_CONFIG = {
     - Cor do desenho temporario, usada quando nao existe imagem PNG em assets.
     - Se houver imagem, a imagem substitui este desenho.
 
+    image:
+    - Nome do ficheiro PNG dentro da pasta assets.
+    - Exemplo: image: "sardinha.png"
+    - Se mudares o nome do peixe, podes manter a mesma imagem ou trocar aqui.
+    - Para criar um peixe novo, cria tambem um PNG em assets e escreve aqui
+      o nome desse ficheiro.
+
     chance:
     - Peso dentro da categoria "fish".
     - So e usado depois de o jogo ja ter escolhido que vai aparecer um peixe.
@@ -120,6 +127,7 @@ window.GAME_CONFIG = {
       name: "Sardinha",
       points: 10,
       color: "#f5c84c",
+      image: "sardinha.png",
       chance: 32,
       shinyChance: 0.035,
       width: 74,
@@ -131,6 +139,7 @@ window.GAME_CONFIG = {
       name: "Carapau",
       points: 15,
       color: "#c4d0dc",
+      image: "carapau.png",
       chance: 24,
       shinyChance: 0.025,
       width: 82,
@@ -142,6 +151,7 @@ window.GAME_CONFIG = {
       name: "Robalo",
       points: 30,
       color: "#e8f7fb",
+      image: "robalo.png",
       chance: 13,
       shinyChance: 0.015,
       width: 96,
@@ -153,6 +163,7 @@ window.GAME_CONFIG = {
       name: "Polvo",
       points: 45,
       color: "#a96be0",
+      image: "polvo.png",
       chance: 7,
       shinyChance: 0.008,
       width: 64,
@@ -164,6 +175,7 @@ window.GAME_CONFIG = {
       name: "Lula",
       points: 55,
       color: "#eef1ff",
+      image: "lula.png",
       chance: 6,
       shinyChance: 0.006,
       width: 72,
@@ -191,6 +203,7 @@ window.GAME_CONFIG = {
     kind: "bigFish",
     points: 1000,
     color: "#2f9f8d",
+    image: "peixe_grande.png",
     chance: 7, // Ja nao controla o aparecimento; fica aqui para futura experimentacao.
     shinyChance: 0.002,
     width: 150,
@@ -207,6 +220,7 @@ window.GAME_CONFIG = {
     kind: "danger",
     points: -20,
     color: "#ef4a3d",
+    image: "alforreca.png",
     chance: 12,
     // chance: peso dentro da categoria "danger".
     // Se danger for baixo em difficultyLevels, as alforrecas continuam raras.
@@ -221,6 +235,7 @@ window.GAME_CONFIG = {
     kind: "sharkHazard",
     points: 0,
     color: "#37516c",
+    image: "tubarao.png",
     chance: 2,
     // chance: peso dentro da categoria "danger", junto com a Alforreca.
     // Para o Tubarao aparecer muito, aumenta esta chance E aumenta danger
@@ -237,6 +252,7 @@ window.GAME_CONFIG = {
       kind: "trash",
       points: -10,
       color: "#45b36a",
+      image: "garrafa.png",
       chance: 7,
       // chance: peso dentro da categoria "trash".
       // Para aparecer mais lixo no jogo todo, aumenta trash em difficultyLevels.
@@ -250,6 +266,7 @@ window.GAME_CONFIG = {
       kind: "trash",
       points: -20,
       color: "#9b671f",
+      image: "bota.png",
       chance: 5,
       // chance: peso dentro da categoria "trash".
       // Este valor decide se aparece mais Bota velha ou mais Garrafa

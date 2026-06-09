@@ -36,7 +36,8 @@ function loadStudentArtImages() {
   const fileNames = new Set([
     "fisherman.png",
     "cliffs.png",
-    ...Object.values(artFileByName)
+    ...Object.values(artFileByName),
+    ...getConfiguredArtFiles()
   ]);
 
   fileNames.forEach((fileName) => {
@@ -56,6 +57,22 @@ function loadStudentArtImages() {
   });
 }
 
+// Recolhe ficheiros image definidos em game-config.js, incluindo peixes novos.
+function getConfiguredArtFiles() {
+  const config = window.GAME_CONFIG || {};
+  const configuredItems = [
+    ...(config.fish || []),
+    ...(config.trash || []),
+    config.bigFish,
+    config.jellyfish,
+    config.shark
+  ];
+
+  return configuredItems
+    .filter((item) => item && item.image)
+    .map((item) => item.image);
+}
+
 // Diz se uma imagem existe e ja esta pronta para desenhar.
 function getLoadedArtImage(fileName) {
   const image = loadedArtImages[fileName];
@@ -69,6 +86,10 @@ function getLoadedArtImage(fileName) {
 
 // Devolve o ficheiro de arte para um item, incluindo shinies pelo nome base.
 function getItemArtFile(item) {
+  if (item.image) {
+    return item.image;
+  }
+
   const baseName = item.baseName || item.name.replace(" shiny", "");
   return artFileByName[baseName] || null;
 }
