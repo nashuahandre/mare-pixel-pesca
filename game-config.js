@@ -221,7 +221,7 @@ window.GAME_CONFIG = {
     points: -20,
     color: "#ef4a3d",
     image: "alforreca.png",
-    chance: 12,
+    chance: 50,
     // chance: peso dentro da categoria "danger".
     // Se danger for baixo em difficultyLevels, as alforrecas continuam raras.
     width: 76,
@@ -236,7 +236,7 @@ window.GAME_CONFIG = {
     points: 0,
     color: "#37516c",
     image: "tubarao.png",
-    chance: 2,
+    chance: 50,
     // chance: peso dentro da categoria "danger", junto com a Alforreca.
     // Para o Tubarao aparecer muito, aumenta esta chance E aumenta danger
     // em difficultyLevels.
@@ -310,19 +310,19 @@ window.GAME_CONFIG = {
       name: "Mar calmo",
       startsAt: 0,
       spawnDelay: 1050,
-      weights: { fish: 88, trash: 9, danger: 3 }
+      weights: { fish: 40, trash: 40, danger: 20 }
     },
     {
       name: "Mar sujo",
       startsAt: 40,
       spawnDelay: 900,
-      weights: { fish: 66, trash: 24, danger: 10 }
+      weights: { fish: 20, trash: 20, danger: 60 }
     },
     {
       name: "Mar perigoso",
       startsAt: 80,
       spawnDelay: 760,
-      weights: { fish: 44, trash: 34, danger: 22 }
+      weights: { fish: 10, trash: 10, danger: 80 }
     }
   ],
 
