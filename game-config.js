@@ -129,7 +129,7 @@ window.GAME_CONFIG = {
       color: "#f5c84c",
       image: "sardinha.png",
       chance: 32,
-      shinyChance: 0.3,
+      shinyChance: 0.035,
       width: 74,
       height: 34,
       speedMin: 1.2,
@@ -141,7 +141,7 @@ window.GAME_CONFIG = {
       color: "#c4d0dc",
       image: "carapau.png",
       chance: 24,
-      shinyChance: 0.3,
+      shinyChance: 0.025,
       width: 82,
       height: 36,
       speedMin: 1.2,
@@ -153,7 +153,7 @@ window.GAME_CONFIG = {
       color: "#e8f7fb",
       image: "robalo.png",
       chance: 13,
-      shinyChance: 0.3,
+      shinyChance: 0.015,
       width: 96,
       height: 40,
       speedMin: 1.2,
@@ -165,7 +165,7 @@ window.GAME_CONFIG = {
       color: "#a96be0",
       image: "polvo.png",
       chance: 7,
-      shinyChance: 0.3,
+      shinyChance: 0.008,
       width: 64,
       height: 44,
       speedMin: 1,
@@ -177,7 +177,7 @@ window.GAME_CONFIG = {
       color: "#eef1ff",
       image: "lula.png",
       chance: 6,
-      shinyChance: 0.3,
+      shinyChance: 0.006,
       width: 72,
       height: 44,
       speedMin: 1.4,
@@ -221,7 +221,7 @@ window.GAME_CONFIG = {
     points: -20,
     color: "#ef4a3d",
     image: "alforreca.png",
-    chance: 50,
+    chance: 12,
     // chance: peso dentro da categoria "danger".
     // Se danger for baixo em difficultyLevels, as alforrecas continuam raras.
     width: 76,
@@ -236,7 +236,7 @@ window.GAME_CONFIG = {
     points: 0,
     color: "#37516c",
     image: "tubarao.png",
-    chance: 50,
+    chance: 2,
     // chance: peso dentro da categoria "danger", junto com a Alforreca.
     // Para o Tubarao aparecer muito, aumenta esta chance E aumenta danger
     // em difficultyLevels.
@@ -310,19 +310,19 @@ window.GAME_CONFIG = {
       name: "Mar calmo",
       startsAt: 0,
       spawnDelay: 1050,
-      weights: { fish: 70, trash: 20, danger: 10 }
+      weights: { fish: 88, trash: 9, danger: 3 }
     },
     {
       name: "Mar sujo",
       startsAt: 40,
       spawnDelay: 900,
-      weights: { fish: 50, trash: 30, danger: 20 }
+      weights: { fish: 66, trash: 24, danger: 10 }
     },
     {
       name: "Mar perigoso",
       startsAt: 80,
       spawnDelay: 760,
-      weights: { fish: 30, trash: 40, danger: 30 }
+      weights: { fish: 44, trash: 34, danger: 22 }
     }
   ],
 
