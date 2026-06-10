@@ -83,7 +83,7 @@ window.GAME_CONFIG = {
     "Peixe Blue": 0.84,
     "Peixe Balao": 0.82,
     "Peixe Colorido": 0.78,
-    "Maria Bianca": 0.72,
+    "Polvo Coral": 0.72,
     Bonnie: 0.68
   },
   bigFishFinalEscapeBonus: 0.08, // Chance extra de fuga mesmo antes de recolher.
@@ -205,7 +205,7 @@ window.GAME_CONFIG = {
       speedMax: 2.4
     },
     {
-      name: "Maria Bianca",
+      name: "Polvo Coral",
       points: 60,
       color: "#71339e",
       image: "maria_bianca.png",
@@ -348,6 +348,7 @@ window.GAME_CONFIG = {
       points: 0,
       color: "#7b858f",
       image: "tubarao_3.png",
+      imageFacesLeft: true,
       chance: 1,
       // Variante ainda mais rara do tubarao que tambem come o isco.
       width: 230,
@@ -364,11 +365,12 @@ window.GAME_CONFIG = {
       points: -10,
       color: "#45b36a",
       image: "garrafa.png",
+      imageOutline: true,
       chance: 7,
       // chance: peso dentro da categoria "trash".
       // Para aparecer mais lixo no jogo todo, aumenta trash em difficultyLevels.
-      width: 54,
-      height: 34,
+      width: 72,
+      height: 160,
       speedMin: 1.2,
       speedMax: 3.1
     },

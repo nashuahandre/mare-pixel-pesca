@@ -135,6 +135,7 @@ function drawItemArtIfReady(item, caughtOnHook = false) {
 
   const shouldRotateOnHook =
     caughtOnHook && (item.kind === "fish" || item.kind === "bigFish" || item.baseName === "Lula" || item.name.includes("Lula"));
+  const shouldFlipForDirection = item.imageFacesLeft ? item.direction === 1 : item.direction === -1;
 
   drawArtImage(image, {
     drawCtx: ctx,
@@ -142,9 +143,10 @@ function drawItemArtIfReady(item, caughtOnHook = false) {
     y: item.y,
     width: item.width,
     height: item.height,
-    flipX: !caughtOnHook && item.direction === -1,
+    flipX: !caughtOnHook && shouldFlipForDirection,
     rotation: shouldRotateOnHook ? -Math.PI / 2 : 0,
-    invert: Boolean(item.isShiny)
+    invert: Boolean(item.isShiny),
+    outline: Boolean(item.imageOutline)
   });
 
   return true;
@@ -196,6 +198,24 @@ function drawArtImage(image, options) {
   drawCtx.translate(centerX, centerY);
   drawCtx.rotate(options.rotation || 0);
   drawCtx.scale(options.flipX ? -1 : 1, 1);
+
+  if (options.outline) {
+    const outlineSize = options.outlineSize || 4;
+    drawCtx.globalAlpha = 0.72;
+    drawCtx.filter = "brightness(0)";
+
+    for (let offsetY = -outlineSize; offsetY <= outlineSize; offsetY += outlineSize) {
+      for (let offsetX = -outlineSize; offsetX <= outlineSize; offsetX += outlineSize) {
+        if (offsetX !== 0 || offsetY !== 0) {
+          drawCtx.drawImage(image, -drawWidth / 2 + offsetX, -drawHeight / 2 + offsetY, drawWidth, drawHeight);
+        }
+      }
+    }
+
+    drawCtx.globalAlpha = 1;
+    drawCtx.filter = options.invert ? "invert(1)" : "none";
+  }
+
   drawCtx.drawImage(image, -drawWidth / 2, -drawHeight / 2, drawWidth, drawHeight);
   drawCtx.restore();
 }
@@ -499,7 +519,9 @@ function drawSummaryIcon(summaryCtx, item) {
       y: item.y,
       width: item.width,
       height: item.height,
-      invert: Boolean(item.isShiny)
+      invert: Boolean(item.isShiny),
+      outline: Boolean(item.imageOutline),
+      outlineSize: 2
     });
 
     return;
