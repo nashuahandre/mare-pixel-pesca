@@ -56,7 +56,7 @@ const hookMaxY = canvas.height - config.hookBottomPadding;
 // Duracao total da partida em segundos. 120 segundos = 2 minutos.
 const gameSeconds = config.gameSeconds;
 
-// Duracao do choque da alforreca em milissegundos.
+// Duracao do choque dos perigos eletricos em milissegundos.
 const shockDuration = config.shockDuration;
 
 // O peixe grande so pode aparecer depois desta pontuacao e do tempo minimo.
@@ -102,11 +102,11 @@ const fishTypes = config.fish.map((fish) => ({
 
 // Lixo e perigos vindos de game-config.js.
 const trashTypes = config.trash;
-const dangerTypes = [config.jellyfish];
+const dangerTypes = config.dangerItems || [config.jellyfish];
 
 // Peixe especial e tubarao tambem ficam no config.
 const bigFishType = config.bigFish;
-const sharkType = config.shark;
+const sharkTypes = config.sharks || [config.shark];
 
 // Probabilidade de o peixe grande fugir conforme o isco usado.
 const bigFishEscapeChanceByBait = config.bigFishEscapeByBait;
@@ -434,7 +434,7 @@ function chooseItemType() {
   }
 
   if (category === "danger") {
-    availableTypes = [...availableTypes, sharkType];
+    availableTypes = [...availableTypes, ...sharkTypes];
   }
 
   const totalChance = availableTypes.reduce((sum, item) => sum + item.chance, 0);
@@ -502,7 +502,7 @@ function getCurrentDifficulty(timestamp) {
   Regras principais:
   - anzol vazio apanha peixe normal/lixo;
   - anzol vazio nao apanha peixe grande nem tubarao;
-  - alforreca da choque;
+  - perigos eletricos dao choque;
   - tubarao come o que estiver no anzol;
   - peixe grande so morde se ja houver um peixe no anzol.
 */
@@ -543,7 +543,7 @@ function checkCollisions(timestamp) {
   }
 }
 
-// Se uma alforreca toca no anzol ou no objeto preso, ativa choque.
+// Se um perigo eletrico toca no anzol ou no objeto preso, ativa choque.
 function checkDangerWhileCarrying(hookBox, timestamp) {
   const danger = items.find((item) => {
     return item.kind === "danger" && (boxesTouch(hookBox, item) || boxesTouch(carriedItem, item));
@@ -629,10 +629,10 @@ function collectCarriedItem() {
     const countName = carriedItem.baseName || carriedItem.name;
     caughtCounts[countName] = (caughtCounts[countName] || 0) + 1;
   } else if (carriedItem.kind === "bigFish") {
-    caughtCounts["Peixe grande"] = (caughtCounts["Peixe grande"] || 0) + 1;
+    caughtCounts[bigFishType.name] = (caughtCounts[bigFishType.name] || 0) + 1;
     bigFishCaught = true;
     bigFishHasSpawned = false;
-    showStatus("Peixe grande capturado! Grande pesca!");
+    showStatus(`${bigFishType.name} capturado! Grande pesca!`);
   }
 
   if (carriedItem.kind === "fish" || carriedItem.kind === "bigFish") {
@@ -642,19 +642,19 @@ function collectCarriedItem() {
   carriedItem = null;
 }
 
-// Aplica a penalizacao da alforreca e bloqueia o jogador por alguns segundos.
+// Aplica a penalizacao do perigo eletrico e bloqueia o jogador por alguns segundos.
 function triggerShock(item, timestamp) {
   score += item.points;
   recordCatch(item);
 
   if (carriedItem && carriedItem.kind === "bigFish") {
-    releaseBigFishToSea(carriedItem, "A alforreca assustou o peixe grande!");
+    releaseBigFishToSea(carriedItem, `${item.name} assustou ${bigFishType.name}!`);
   } else {
     carriedItem = null;
   }
 
   shockUntil = timestamp + shockDuration;
-  showStatus("Choque da alforreca! Espera 5 segundos.");
+  showStatus(`${item.name} deu choque! Espera ${Math.ceil(shockDuration / 1000)} segundos.`);
 }
 
 // Guarda um item no resumo final: quantidade, pontos por unidade e total.
@@ -737,7 +737,7 @@ function showStatus(message) {
   statusMessageUntil = performance.now() + 2400;
 }
 
-// Verdadeiro enquanto o jogador esta em choque por causa da alforreca.
+// Verdadeiro enquanto o jogador esta em choque por causa de um perigo eletrico.
 function isShocked(timestamp) {
   return timestamp < shockUntil;
 }
@@ -1023,15 +1023,13 @@ function drawHud() {
   drawHudPanel(824, 24, 346, 158);
 
   drawText("Tipos de peixe", 42, 56, 24, "#10263f", "bold");
-  drawText(`Sardinha: ${caughtCounts.Sardinha || 0}`, 42, 88, 18, "#10263f");
-  drawText(`Carapau: ${caughtCounts.Carapau || 0}`, 42, 112, 18, "#10263f");
-  drawText(`Robalo: ${caughtCounts.Robalo || 0}`, 42, 136, 18, "#10263f");
-  drawText(`Polvo: ${caughtCounts.Polvo || 0}`, 42, 160, 18, "#10263f");
-  drawText(`Lula: ${caughtCounts.Lula || 0}`, 42, 184, 18, "#10263f");
+  fishTypes.slice(0, 5).forEach((fish, index) => {
+    drawText(`${fish.name}: ${caughtCounts[fish.name] || 0}`, 42, 88 + index * 24, 18, "#10263f");
+  });
 
   drawText(`Pontos: ${score}`, 846, 66, 30, "#10263f", "bold");
   drawText(`Tempo: ${timeLeft}s`, 846, 104, 24, "#10263f", "bold");
-  drawText(`Peixe grande: ${caughtCounts["Peixe grande"] || 0}`, 846, 134, 17, "#10263f");
+  drawText(`${bigFishType.name}: ${caughtCounts[bigFishType.name] || 0}`, 846, 134, 17, "#10263f");
   drawText(`Nivel: ${getCurrentDifficulty(performance.now()).name}`, 846, 158, 17, "#10263f");
 
   if (carriedItem) {

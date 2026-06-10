@@ -7,14 +7,22 @@ Default file names:
 
 - fisherman.png
 - cliffs.png
-- sardinha.png
-- carapau.png
-- robalo.png
-- polvo.png
-- lula.png
-- peixe_grande.png
+- mel_peixe.png
+- fredy_peixe.png
+- peixe_andreia.png
+- peixe_azul.png
+- peixe_balao.png
+- peixe_blue.png
+- maria_bianca.png
+- peixe_colorido.png
+- peixe_roxo.png
+- peixe_topeto.png
+- bonnie.png
+- peixe_lua.png
+- enguia.png
+- enguia_galatica.png
 - tubarao.png
-- alforreca.png
+- tubarao_3.png
 - garrafa.png
 - bota.png
 

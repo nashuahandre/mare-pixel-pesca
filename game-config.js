@@ -75,7 +75,16 @@ window.GAME_CONFIG = {
     Carapau: 0.94,
     Robalo: 0.86,
     Polvo: 0.76,
-    Lula: 0.7 // Lula e um isco um pouco melhor.
+    Lula: 0.7, // Lula e um isco um pouco melhor.
+    "Mel Peixe": 0.98,
+    "Fredy Peixe": 0.94,
+    "Peixe Andreia": 0.9,
+    "Peixe Azul": 0.88,
+    "Peixe Blue": 0.84,
+    "Peixe Balao": 0.82,
+    "Peixe Colorido": 0.78,
+    "Maria Bianca": 0.72,
+    Bonnie: 0.68
   },
   bigFishFinalEscapeBonus: 0.08, // Chance extra de fuga mesmo antes de recolher.
   bigFishEscapeDelayMin: 250, // Tempo minimo ate tentar largar o anzol.
@@ -124,64 +133,136 @@ window.GAME_CONFIG = {
   */
   fish: [
     {
-      name: "Sardinha",
+      name: "Mel Peixe",
       points: 10,
-      color: "#f5c84c",
-      image: "sardinha.png",
+      color: "#e77bd3",
+      image: "mel_peixe.png",
       chance: 32,
       shinyChance: 0.035,
-      width: 74,
-      height: 34,
-      speedMin: 1.2,
-      speedMax: 3.1
+      width: 78,
+      height: 30,
+      speedMin: 1.4,
+      speedMax: 3.3
     },
     {
-      name: "Carapau",
-      points: 15,
-      color: "#c4d0dc",
-      image: "carapau.png",
-      chance: 24,
+      name: "Fredy Peixe",
+      points: 20,
+      color: "#a46442",
+      image: "fredy_peixe.png",
+      chance: 22,
       shinyChance: 0.025,
       width: 82,
-      height: 36,
-      speedMin: 1.2,
-      speedMax: 3.1
+      height: 50,
+      speedMin: 1.1,
+      speedMax: 2.7
     },
     {
-      name: "Robalo",
+      name: "Peixe Andreia",
       points: 30,
-      color: "#e8f7fb",
-      image: "robalo.png",
-      chance: 13,
+      color: "#71339e",
+      image: "peixe_andreia.png",
+      chance: 16,
       shinyChance: 0.015,
-      width: 96,
-      height: 40,
+      width: 100,
+      height: 44,
       speedMin: 1.2,
       speedMax: 3.1
     },
     {
-      name: "Polvo",
+      name: "Peixe Azul",
+      points: 35,
+      color: "#1baee8",
+      image: "peixe_azul.png",
+      chance: 14,
+      shinyChance: 0.012,
+      width: 96,
+      height: 62,
+      speedMin: 1.0,
+      speedMax: 2.6
+    },
+    {
+      name: "Peixe Balao",
+      points: 40,
+      color: "#ffe73a",
+      image: "peixe_balao.png",
+      chance: 11,
+      shinyChance: 0.01,
+      width: 82,
+      height: 62,
+      speedMin: 0.9,
+      speedMax: 2.2
+    },
+    {
+      name: "Peixe Blue",
       points: 45,
-      color: "#a96be0",
-      image: "polvo.png",
-      chance: 7,
+      color: "#16aee9",
+      image: "peixe_blue.png",
+      chance: 9,
       shinyChance: 0.008,
-      width: 64,
-      height: 44,
-      speedMin: 1,
+      width: 112,
+      height: 64,
+      speedMin: 1.0,
+      speedMax: 2.4
+    },
+    {
+      name: "Maria Bianca",
+      points: 60,
+      color: "#71339e",
+      image: "maria_bianca.png",
+      chance: 7,
+      shinyChance: 0.006,
+      width: 76,
+      height: 82,
+      speedMin: 0.9,
+      speedMax: 2.2
+    },
+    {
+      name: "Peixe Colorido",
+      points: 70,
+      color: "#0c83bd",
+      image: "peixe_colorido.png",
+      chance: 5,
+      shinyChance: 0.004,
+      width: 118,
+      height: 84,
+      speedMin: 1.0,
       speedMax: 2.5
     },
     {
-      name: "Lula",
-      points: 55,
-      color: "#eef1ff",
-      image: "lula.png",
-      chance: 6,
-      shinyChance: 0.006,
-      width: 72,
-      height: 44,
-      speedMin: 1.4,
-      speedMax: 3.4
+      name: "Peixe Roxo",
+      points: 85,
+      color: "#9e28b4",
+      image: "peixe_roxo.png",
+      chance: 4,
+      shinyChance: 0.003,
+      width: 108,
+      height: 96,
+      speedMin: 0.9,
+      speedMax: 2.0
+    },
+    {
+      name: "Peixe Topeto",
+      points: 90,
+      color: "#18a51d",
+      image: "peixe_topeto.png",
+      chance: 3,
+      shinyChance: 0.0025,
+      width: 70,
+      height: 72,
+      speedMin: 1.2,
+      speedMax: 2.8
+    },
+    {
+      name: "Bonnie",
+      points: 120,
+      color: "#4356bd",
+      image: "bonnie.png",
+      chance: 2,
+      shinyChance: 0.0015,
+      width: 118,
+      height: 106,
+      speedMin: 0.8,
+      speedMax: 1.8
     }
   ],
 
@@ -199,15 +280,15 @@ window.GAME_CONFIG = {
     Se fugir do anzol, volta para o mar e continua a ser o mesmo peixe grande.
   */
   bigFish: {
-    name: "Peixe grande",
+    name: "Peixe Lua",
     kind: "bigFish",
     points: 1000,
-    color: "#2f9f8d",
-    image: "peixe_grande.png",
+    color: "#ffe94a",
+    image: "peixe_lua.png",
     chance: 7, // Ja nao controla o aparecimento; fica aqui para futura experimentacao.
     shinyChance: 0.002,
-    width: 150,
-    height: 64,
+    width: 142,
+    height: 148,
     speedMin: 0.5,
     speedMax: 0.9
   },
@@ -215,36 +296,66 @@ window.GAME_CONFIG = {
   // ------------------------------
   // Perigos e lixo
   // ------------------------------
-  jellyfish: {
-    name: "Alforreca",
-    kind: "danger",
-    points: -20,
-    color: "#ef4a3d",
-    image: "alforreca.png",
-    chance: 12,
-    // chance: peso dentro da categoria "danger".
-    // Se danger for baixo em difficultyLevels, as alforrecas continuam raras.
-    width: 76,
-    height: 52,
-    speedMin: 1.2,
-    speedMax: 3.1
-  },
+  dangerItems: [
+    {
+      name: "Enguia",
+      kind: "danger",
+      points: -25,
+      color: "#a4f20b",
+      image: "enguia.png",
+      chance: 14,
+      // chance: peso dentro da categoria "danger".
+      // Se danger for baixo em difficultyLevels, as enguias continuam raras.
+      width: 118,
+      height: 48,
+      speedMin: 1.4,
+      speedMax: 3.4
+    },
+    {
+      name: "Enguia galatica",
+      kind: "danger",
+      points: -45,
+      color: "#1b2b9b",
+      image: "enguia_galatica.png",
+      chance: 5,
+      // Perigo raro: da choque como a Enguia, mas tira mais pontos.
+      width: 108,
+      height: 42,
+      speedMin: 2.0,
+      speedMax: 4.2
+    }
+  ],
 
-  shark: {
-    name: "Tubarao",
-    kind: "sharkHazard",
-    points: 0,
-    color: "#37516c",
-    image: "tubarao.png",
-    chance: 2,
-    // chance: peso dentro da categoria "danger", junto com a Alforreca.
-    // Para o Tubarao aparecer muito, aumenta esta chance E aumenta danger
-    // em difficultyLevels.
-    width: 260,
-    height: 110,
-    speedMin: 13,
-    speedMax: 17
-  },
+  sharks: [
+    {
+      name: "Tubarao azul",
+      kind: "sharkHazard",
+      points: 0,
+      color: "#14b8e9",
+      image: "tubarao.png",
+      chance: 2,
+      // chance: peso dentro da categoria "danger", junto com as enguias.
+      // Para o Tubarao aparecer muito, aumenta esta chance E aumenta danger
+      // em difficultyLevels.
+      width: 270,
+      height: 178,
+      speedMin: 13,
+      speedMax: 17
+    },
+    {
+      name: "Tubarao cinzento",
+      kind: "sharkHazard",
+      points: 0,
+      color: "#7b858f",
+      image: "tubarao_3.png",
+      chance: 1,
+      // Variante ainda mais rara do tubarao que tambem come o isco.
+      width: 230,
+      height: 208,
+      speedMin: 12,
+      speedMax: 16
+    }
+  ],
 
   trash: [
     {
@@ -332,14 +443,22 @@ window.GAME_CONFIG = {
   assetPlaceholders: [
     "fisherman.png",
     "cliffs.png",
-    "sardinha.png",
-    "carapau.png",
-    "robalo.png",
-    "polvo.png",
-    "lula.png",
-    "peixe_grande.png",
+    "mel_peixe.png",
+    "fredy_peixe.png",
+    "peixe_andreia.png",
+    "peixe_azul.png",
+    "peixe_balao.png",
+    "peixe_blue.png",
+    "maria_bianca.png",
+    "peixe_colorido.png",
+    "peixe_roxo.png",
+    "peixe_topeto.png",
+    "bonnie.png",
+    "peixe_lua.png",
+    "enguia.png",
+    "enguia_galatica.png",
     "tubarao.png",
-    "alforreca.png",
+    "tubarao_3.png",
     "garrafa.png",
     "bota.png"
   ]

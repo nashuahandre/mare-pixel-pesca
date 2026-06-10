@@ -12,11 +12,11 @@ Each game lasts 2 minutes.
 
 Catch fish to gain points.
 
-Avoid jellyfish.
+Avoid electric eels.
 
 Trash gives no points.
 
-Jellyfish shock the hook and remove points. The shock duration is set in `game-config.js`.
+Electric eels shock the hook and remove points. The shock duration is set in `game-config.js`.
 
 Some fish can appear as rare shiny versions with inverted colors. Shiny fish give 4x points.
 
@@ -26,13 +26,13 @@ The big fish is worth 1000 points. It only bites if the hook is already carrying
 
 The shark is a very rare, very fast and large danger. If it hits anything on the hook, it eats it and keeps swimming out of the screen.
 
-At the end, the game shows a summary with only the items that were caught at least once, including fish, shiny fish, trash and jellyfish shocks.
+At the end, the game shows a summary with only the items that were caught at least once, including fish, shiny fish, trash and electric shocks.
 
 Difficulty increases with time:
 
-- 0-39 seconds: mostly fish, little trash, very few jellyfish.
-- 40-79 seconds: more trash and some jellyfish.
-- 80+ seconds: many trash items and jellyfish.
+- 0-39 seconds: mostly fish, little trash, very few electric eels.
+- 40-79 seconds: more trash and some electric eels.
+- 80+ seconds: many trash items and electric eels.
 
 ## Technology
 
@@ -45,7 +45,7 @@ No install, no local server, no accounts, no database.
 
 ## Game variables
 
-Edit `game-config.js` to change points, speeds, probabilities, shiny rarity, difficulty timing, shark size, jellyfish shock duration and big fish escape chances.
+Edit `game-config.js` to change points, speeds, probabilities, shiny rarity, difficulty timing, shark size, electric shock duration and big fish escape chances.
 
 ## Project files
 
@@ -65,14 +65,22 @@ The current default image names are:
 
 - `fisherman.png`
 - `cliffs.png`
-- `sardinha.png`
-- `carapau.png`
-- `robalo.png`
-- `polvo.png`
-- `lula.png`
-- `peixe_grande.png`
+- `mel_peixe.png`
+- `fredy_peixe.png`
+- `peixe_andreia.png`
+- `peixe_azul.png`
+- `peixe_balao.png`
+- `peixe_blue.png`
+- `maria_bianca.png`
+- `peixe_colorido.png`
+- `peixe_roxo.png`
+- `peixe_topeto.png`
+- `bonnie.png`
+- `peixe_lua.png`
+- `enguia.png`
+- `enguia_galatica.png`
 - `tubarao.png`
-- `alforreca.png`
+- `tubarao_3.png`
 - `garrafa.png`
 - `bota.png`
 

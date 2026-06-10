@@ -63,6 +63,8 @@ function getConfiguredArtFiles() {
   const configuredItems = [
     ...(config.fish || []),
     ...(config.trash || []),
+    ...(config.dangerItems || []),
+    ...(config.sharks || []),
     config.bigFish,
     config.jellyfish,
     config.shark
