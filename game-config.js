@@ -52,6 +52,13 @@ window.GAME_CONFIG = {
   gameSeconds: 120, // 120 segundos = 2 minutos.
 
   // ------------------------------
+  // Performance para computadores antigos
+  // ------------------------------
+  maxBubbles: 24, // Numero maximo de bolhas decorativas no ecrã.
+  maxVisibleCaughtPile: 36, // Numero maximo de peixes desenhados no monte visual.
+  maxStoredCaughtPile: 70, // Numero maximo de peixes guardados para desenhar o monte.
+
+  // ------------------------------
   // Anzol e estados de bloqueio
   // ------------------------------
   hookX: 540, // Posicao horizontal fixa do anzol.

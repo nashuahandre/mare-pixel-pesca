@@ -25,6 +25,7 @@ const artFileByName = {
 
 // Cache simples das imagens. Cada ficheiro e carregado uma vez no inicio.
 const loadedArtImages = {};
+const preparedArtCache = {};
 
 loadStudentArtImages();
 
@@ -177,6 +178,24 @@ function drawArtImage(image, options) {
   const drawCtx = options.drawCtx;
   const centerX = options.x + options.width / 2;
   const centerY = options.y + options.height / 2;
+  const preparedImage = getPreparedArtImage(image, options);
+  const drawWidth = preparedImage.width;
+  const drawHeight = preparedImage.height;
+
+  drawCtx.save();
+  drawCtx.imageSmoothingEnabled = false;
+  drawCtx.translate(centerX, centerY);
+  drawCtx.rotate(options.rotation || 0);
+  drawCtx.scale(options.flipX ? -1 : 1, 1);
+  drawCtx.drawImage(preparedImage.canvas, -drawWidth / 2, -drawHeight / 2, drawWidth, drawHeight);
+  drawCtx.restore();
+}
+
+/*
+  Prepara uma versao pequena da imagem uma unica vez por tamanho/efeito.
+  Isto evita reescalar PNGs grandes em todos os frames nos computadores antigos.
+*/
+function getPreparedArtImage(image, options) {
   const imageRatio = image.naturalWidth / image.naturalHeight;
   const boxRatio = options.width / options.height;
   let drawWidth = options.width;
@@ -188,36 +207,55 @@ function drawArtImage(image, options) {
     drawWidth = options.height * imageRatio;
   }
 
-  drawCtx.save();
-  drawCtx.imageSmoothingEnabled = false;
+  drawWidth = Math.max(1, Math.round(drawWidth));
+  drawHeight = Math.max(1, Math.round(drawHeight));
 
-  if (options.invert) {
-    drawCtx.filter = "invert(1)";
+  const outlineSize = options.outline ? options.outlineSize || 4 : 0;
+  const cacheKey = [
+    image.src,
+    drawWidth,
+    drawHeight,
+    options.invert ? "invert" : "normal",
+    outlineSize
+  ].join("|");
+
+  if (preparedArtCache[cacheKey]) {
+    return preparedArtCache[cacheKey];
   }
 
-  drawCtx.translate(centerX, centerY);
-  drawCtx.rotate(options.rotation || 0);
-  drawCtx.scale(options.flipX ? -1 : 1, 1);
+  const padding = outlineSize;
+  const cacheCanvas = document.createElement("canvas");
+  const cacheCtx = cacheCanvas.getContext("2d");
 
-  if (options.outline) {
-    const outlineSize = options.outlineSize || 4;
-    drawCtx.globalAlpha = 0.72;
-    drawCtx.filter = "brightness(0)";
+  cacheCanvas.width = drawWidth + padding * 2;
+  cacheCanvas.height = drawHeight + padding * 2;
+  cacheCtx.imageSmoothingEnabled = false;
+
+  if (outlineSize > 0) {
+    cacheCtx.globalAlpha = 0.72;
+    cacheCtx.filter = "brightness(0)";
 
     for (let offsetY = -outlineSize; offsetY <= outlineSize; offsetY += outlineSize) {
       for (let offsetX = -outlineSize; offsetX <= outlineSize; offsetX += outlineSize) {
         if (offsetX !== 0 || offsetY !== 0) {
-          drawCtx.drawImage(image, -drawWidth / 2 + offsetX, -drawHeight / 2 + offsetY, drawWidth, drawHeight);
+          cacheCtx.drawImage(image, padding + offsetX, padding + offsetY, drawWidth, drawHeight);
         }
       }
     }
 
-    drawCtx.globalAlpha = 1;
-    drawCtx.filter = options.invert ? "invert(1)" : "none";
+    cacheCtx.globalAlpha = 1;
   }
 
-  drawCtx.drawImage(image, -drawWidth / 2, -drawHeight / 2, drawWidth, drawHeight);
-  drawCtx.restore();
+  cacheCtx.filter = options.invert ? "invert(1)" : "none";
+  cacheCtx.drawImage(image, padding, padding, drawWidth, drawHeight);
+
+  preparedArtCache[cacheKey] = {
+    canvas: cacheCanvas,
+    width: cacheCanvas.width,
+    height: cacheCanvas.height
+  };
+
+  return preparedArtCache[cacheKey];
 }
 
 // Desenho temporario de peixe normal a nadar de lado.

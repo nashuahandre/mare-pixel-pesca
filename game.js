@@ -114,6 +114,11 @@ const bigFishEscapeChanceByBait = config.bigFishEscapeByBait;
 // Dificuldade por tempo.
 const difficultyLevels = config.difficultyLevels;
 
+// Limites visuais para computadores mais antigos.
+const maxBubbles = config.maxBubbles || 24;
+const maxVisibleCaughtPile = config.maxVisibleCaughtPile || 36;
+const maxStoredCaughtPile = config.maxStoredCaughtPile || 70;
+
 // ============================================================
 // 5. Eventos de entrada do jogador
 // ============================================================
@@ -274,7 +279,7 @@ function updateItems(timestamp) {
 
 // Cria e move bolhas decorativas na agua.
 function updateBubbles(timestamp) {
-  if (timestamp >= nextBubbleSpawnTime) {
+  if (timestamp >= nextBubbleSpawnTime && bubbles.length < maxBubbles) {
     spawnBubbleGroup();
     nextBubbleSpawnTime = timestamp + randomBetween(600, 1600);
   }
@@ -292,7 +297,7 @@ function updateBubbles(timestamp) {
 // Pequenos grupos ficam mais naturais do que uma bolha isolada perfeita.
 function spawnBubbleGroup() {
   const groupX = randomBetween(80, canvas.width - 80);
-  const groupSize = Math.floor(randomBetween(2, 5));
+  const groupSize = Math.min(Math.floor(randomBetween(2, 5)), maxBubbles - bubbles.length);
 
   for (let index = 0; index < groupSize; index += 1) {
     bubbles.push({
@@ -637,6 +642,7 @@ function collectCarriedItem() {
 
   if (carriedItem.kind === "fish" || carriedItem.kind === "bigFish") {
     recentCatch.push({ ...carriedItem });
+    recentCatch = recentCatch.slice(-maxStoredCaughtPile);
   }
 
   carriedItem = null;
@@ -954,7 +960,9 @@ function drawFishermanPlaceholder() {
   E desenhado antes do HUD, por isso os paineis ficam sempre por cima.
 */
 function drawCollectionPile() {
-  recentCatch.forEach((item, index) => {
+  const visibleCatch = recentCatch.slice(-maxVisibleCaughtPile);
+
+  visibleCatch.forEach((item, index) => {
     const column = index % 8;
     const row = Math.floor(index / 8);
     const wobbleX = Math.sin(index * 1.9) * 18;
